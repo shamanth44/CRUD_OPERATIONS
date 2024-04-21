@@ -31,50 +31,54 @@ const registerAdmin = asyncHandler(async (req, res) => {
   //check for admin creation
   // return res
 
-  const { name, email, password } = req.body;
-
-  if ([name, email, password].some((field) => field?.trim() === "")) {
-    throw new ApiError(400, "all fields are required");
-  }
-
-  const existedAdmin = await Admin.findOne({
-    $or: [{ name }, { email }],
-  });
-
-  if (existedAdmin) {
-    throw new ApiError(409, "Email or name already exists");
-  }
-
-  const imageLocalPath = req.files?.image[0]?.path;
-
-  if (!imageLocalPath) {
-    throw new ApiError(400, "Image is required");
-  }
-
-  const image = await uploadOnCloudinary(imageLocalPath);
-
-  if (!image) {
-    throw new ApiError(400, "Image is required");
-  }
-
-  const admin = await Admin.create({
-    name,
-    image: image.url,
-    email,
-    password,
-  });
-
-  const createdAdmin = await Admin.findById(admin._id).select(
-    "-password" - "refreshToken"
-  );
-
-  if (!createdAdmin) {
-    throw new ApiError(500, "Something went wrong while registering");
-  }
-
-  return res
-    .status(201)
-    .json(new ApiResponse(200, createdAdmin, "Admin registered"));
+try {
+    const { name, email, password } = req.body;
+  
+    if ([name, email, password].some((field) => field?.trim() === "")) {
+      throw new ApiError(400, "all fields are required");
+    }
+  
+    const existedAdmin = await Admin.findOne({
+      $or: [{ name }, { email }],
+    });
+  
+    if (existedAdmin) {
+      throw new ApiError(409, "Email or name already exists");
+    }
+  
+    const imageLocalPath = req.files?.image[0]?.path;
+  
+    if (!imageLocalPath) {
+      throw new ApiError(400, "Image is required");
+    }
+  
+    const image = await uploadOnCloudinary(imageLocalPath);
+  
+    if (!image) {
+      throw new ApiError(400, "Image is required");
+    }
+  
+    const admin = await Admin.create({
+      name,
+      image: image.url,
+      email,
+      password,
+    });
+  
+    const createdAdmin = await Admin.findById(admin._id).select(
+      "-password -refreshToken"
+    );
+  
+    if (!createdAdmin) {
+      throw new ApiError(500, "Something went wrong while registering");
+    }
+  
+    return res
+      .status(201)
+      .json(new ApiResponse(200, createdAdmin, "Admin registered"));
+} catch (error) {
+  throw new ApiError(500, "Something went wrong while registering 01")
+}
 });
 
 const loginAdmin = asyncHandler(async (req, res) => {
@@ -118,6 +122,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
     secure: true,
   };
 
+  
   return res
     .status(200)
     .cookie("accessToken", accessToken, options)
@@ -163,7 +168,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
 const refreshAccessToken = asyncHandler(async(req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
 
-    if(incomingRefreshToken) {
+    if(!incomingRefreshToken) {
         throw new ApiError(401, "unauthorized request")
     }
 
@@ -206,7 +211,6 @@ const refreshAccessToken = asyncHandler(async(req, res) => {
     }
 
 })
-
 
 
 
