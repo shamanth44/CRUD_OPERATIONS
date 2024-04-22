@@ -1,14 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const employeeSchema = new Schema({
-  id: {
+  uniqueId: {
     type: String,
     required: true,
     unique: true,
-  },
-  image: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,
@@ -23,7 +19,7 @@ const employeeSchema = new Schema({
   mobileNo: {
     type: Number,
     required: true,
-    unique: ture,
+    unique: true,
   },
   designation: {
     type: String,
@@ -34,6 +30,10 @@ const employeeSchema = new Schema({
     required: true,
   },
   course: {
+    type: String,
+    required: true,
+  },
+  image: {
     type: String,
     required: true,
   },
