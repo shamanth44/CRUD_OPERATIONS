@@ -17,6 +17,8 @@ router
 
   router.route("/refresh-token").post( refreshAccessToken )
 
+  // http://localhost:8000/api/v1/admin/refresh-token
+
 
   
 

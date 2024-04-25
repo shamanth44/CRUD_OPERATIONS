@@ -61,17 +61,18 @@ const createEmployee = asyncHandler(async (req, res) => {
 });
 
 const getAllEmployees = asyncHandler(async (req, res) => {
+  const allEmployees = await Employee.find({});
 
-    const allEmployees = await Employee.find()
+  if (!allEmployees) {
+    throw new ApiError(500, "Something went wrong while fetching employees");
+  }
 
-    if (!allEmployees) {
-        throw new ApiError (500, "Something went wrong while fetching employees")
-    }
-
-    return res.status(201)
-    .json(new ApiResponse(200, {allEmployees}, "Employee fetched successfully"))
-    
-})
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(200, allEmployees, `Employees fetched successfully, total employees are ${allEmployees.length}`)
+    );
+});
 
 const updateEmployee = asyncHandler(async (req, res) => {
   const { uniqueId, name, email, mobileNo, designation, gender, course } =

@@ -31,54 +31,54 @@ const registerAdmin = asyncHandler(async (req, res) => {
   //check for admin creation
   // return res
 
-try {
+  try {
     const { name, email, password } = req.body;
-  
+
     if ([name, email, password].some((field) => field?.trim() === "")) {
       throw new ApiError(400, "all fields are required");
     }
-  
+
     const existedAdmin = await Admin.findOne({
       $or: [{ name }, { email }],
     });
-  
+
     if (existedAdmin) {
       throw new ApiError(409, "Email or name already exists");
     }
-  
+
     const imageLocalPath = req.files?.image[0]?.path;
-  
+
     if (!imageLocalPath) {
       throw new ApiError(400, "Image is required");
     }
-  
+
     const image = await uploadOnCloudinary(imageLocalPath);
-  
+
     if (!image) {
       throw new ApiError(400, "Image is required");
     }
-  
+
     const admin = await Admin.create({
       name,
       image: image.url,
       email,
       password,
     });
-  
+
     const createdAdmin = await Admin.findById(admin._id).select(
       "-password -refreshToken"
     );
-  
+
     if (!createdAdmin) {
       throw new ApiError(500, "Something went wrong while registering");
     }
-  
+
     return res
       .status(201)
       .json(new ApiResponse(200, createdAdmin, "Admin registered"));
-} catch (error) {
-  throw new ApiError(500, "Something went wrong while registering 01")
-}
+  } catch (error) {
+    throw new ApiError(500, "Something went wrong while registering 01");
+  }
 });
 
 const loginAdmin = asyncHandler(async (req, res) => {
@@ -117,16 +117,22 @@ const loginAdmin = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
 
-  const options = {
+  const options1 = {
     httpOnly: true,
     secure: true,
+    maxAge: 60000,
   };
 
-  
+  const options2 = {
+    httpOnly: true,
+    secure: true,
+    maxAge: 300000,
+  };
+
   return res
     .status(200)
-    .cookie("accessToken", accessToken, options)
-    .cookie("refreshToken", refreshToken, options)
+    .cookie("accessToken", accessToken, options1)
+    .cookie("refreshToken", refreshToken, options2)
     .json(
       new ApiResponse(
         200,
@@ -165,53 +171,62 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Admin logged out"));
 });
 
-const refreshAccessToken = asyncHandler(async(req, res) => {
-    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const incomingRefreshToken =
+    req.cookies.refreshToken || req.body.refreshToken;
 
-    if(!incomingRefreshToken) {
-        throw new ApiError(401, "unauthorized request")
+  if (!incomingRefreshToken) {
+    throw new ApiError(401, "unauthorized request");
+  }
+
+  try {
+    const decodedToken = jwt.verify(
+      incomingRefreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    const admin = Admin.findById(decodedToken?._id);
+
+    if (!admin) {
+      throw new ApiError(401, "Invalid refresh token");
     }
 
-    try {
-        const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET)
-    
-        const admin = Admin.findById(decodedToken?._id)
-    
-        if(!admin){
-            throw new ApiError(401, "Invalid refresh token")
-        }
-    
-        if(incomingRefreshToken !== admin?.refreshToken){
-            throw new ApiError(401, "Refresh token  expired")
-        }
-    
-    
-        const options = {
-            httpOnly: true,
-            secure: true
-        }
-    
-        const { accessToken, newRefreshToken } = await generateAccessAndRefreshToken(admin._id)
-    
-        return res.status(200)
-        .cookie("accessToken", accessToken, options)
-        .cookie("refressToken", newRefreshToken, options)
-        .json(
-            new ApiResponse(
-                200,
-                {
-                    accessToken,
-                    refressToken: newRefreshToken,
-                },
-                "Access token refreshed"
-            )
+    if (incomingRefreshToken !== admin?.refreshToken) {
+      throw new ApiError(401, "Refresh token  expired");
+    }
+
+    const options1 = {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60000,
+    };
+
+    const options2 = {
+      httpOnly: true,
+      secure: true,
+      maxAge: 300000,
+    };
+
+    const { accessToken, refreshToken:newRefreshToken } =
+      await generateAccessAndRefreshToken(admin._id);
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options1)
+      .cookie("refressToken", newRefreshToken, options2)
+      .json(
+        new ApiResponse(
+          200,
+          {
+            accessToken,
+            refressToken: newRefreshToken,
+          },
+          "Access token refreshed"
         )
-    } catch (error) {
-        throw new ApiError(401, error?.message || "Invalid refresh token")
-    }
-
-})
-
-
+      );
+  } catch (error) {
+    throw new ApiError(401, error?.message || "Invalid refresh token");
+  }
+});
 
 export { registerAdmin, loginAdmin, logoutAdmin, refreshAccessToken };

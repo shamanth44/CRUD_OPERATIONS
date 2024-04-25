@@ -12,7 +12,14 @@ router
     upload.fields([{ name: "image", maxCount: 1 }]),
     createEmployee
   );
-
+  
+  router
+  .route("/get-employees")
+  .get(
+    verifyJwt,
+    getAllEmployees
+  );
+  
 router
   .route("/update-employee/:id")
   .put(
@@ -20,6 +27,7 @@ router
     upload.fields([{ name: "image", maxCount: 1 }]),
     updateEmployee
   );
+  
 
   router
   .route("/delete-employee/:id")
@@ -28,12 +36,6 @@ router
     deleteEmployee
   );
 
-  router
-  .route("/get-employees")
-  .get(
-    verifyJwt,
-    getAllEmployees
-  );
   
 
 export default router;
