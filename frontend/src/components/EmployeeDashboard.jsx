@@ -22,7 +22,7 @@ function EmployeeDashboard() {
   useEffect(() => {
     setTimeout(() => {
     getEmployees();
-    }, 1000);
+    }, 500);
   }, []);
   return (
     <>
