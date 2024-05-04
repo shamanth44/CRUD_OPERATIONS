@@ -7,7 +7,7 @@ const app = express();
 app.use(cors(
     {
     origin: `${process.env.CORS_ORIGIN}`,
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
     credentials: true
     }
 ))
@@ -21,9 +21,10 @@ app.use(cookieParser())
 import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
 
-app.use("/", (req, res) => {
+app.use("/api/v1/admin", (req, res) =>{
     res.send("Server")
 })
+
 app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
 
 app.use("/api/v1/employee", employeeRouter) // http://localhost:8000/api/v1/employee/create-employee
