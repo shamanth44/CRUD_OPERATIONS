@@ -6,8 +6,9 @@ const app = express();
 
 app.use(cors(
     {
-    origin: `${process.env.CORS_ORIGIN}`,
+    // origin: `${process.env.CORS_ORIGIN}`,
     // origin: "http://localhost:5173",
+    origin: "https://employee-dashboard-ashen.vercel.app/",
     credentials: true
     }
 ))
@@ -21,10 +22,10 @@ app.use(cookieParser())
 import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
 
-app.use("/api/v1/admin", (req, res) =>{
+
+app.use("/", (req,res) =>{
     res.send("Server")
 })
-
 app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
 
 app.use("/api/v1/employee", employeeRouter) // http://localhost:8000/api/v1/employee/create-employee
