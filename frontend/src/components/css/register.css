@@ -1,0 +1,197 @@
+.logo h1 {
+  padding: 0px;
+  margin: 0px;
+  color: #01182c;
+}
+
+.register {
+  color: black;
+  margin: 0px;
+}
+
+.mainContainer {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+}
+
+.selects {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+}
+
+.signup {
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ddedff;
+  /* height: 500px; */
+  width: 500px;
+}
+
+.button {
+  cursor: pointer;
+  font-size: 16px;
+  width: 150px;
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #003059;
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: #01182c;
+}
+
+.buttonBox {
+  width: 90%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+    position: sticky;
+    top: 0px;
+  background-color: #ddedff;
+  padding: 5px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.navitemsRight {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.backButton {
+  display: flex;
+}
+
+.dashboard {
+  text-decoration: none;
+  color: black;
+}
+
+.employeeBox {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.employees {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #bf2828; */
+}
+
+.employeeTable {
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+.loading{
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading p{
+    color: white;
+}
+
+#table {
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+#table tr td {
+    color: black;
+}
+
+#table td,
+#table th {
+  border-right: 1px solid rgb(58, 58, 58);
+  padding: 10px;
+}
+
+#table tr:nth-child(even) {
+  background-color: #ddedff;
+}
+#table tr:nth-child(odd) {
+    background-color: #b7d8fd;
+  }
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #3e5d83;
+  color: white;
+}
+
+
+.action{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+}
+
+
+.editLink {
+  text-decoration: none;
+  color: white;
+}
+
+.actionButton1 {
+    cursor: pointer;
+    width: 75px;
+    height: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #003059;
+    transition-duration: 0.4s;
+}
+
+.actionButton1:hover {
+    background-color: #01182c;
+  }
+
+  .actionButton2 {
+    cursor: pointer;
+    width: 75px;
+    height: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #590000;
+    transition-duration: 0.4s;
+}
+
+.actionButton2:hover {
+    background-color: #2c0101;
+  }

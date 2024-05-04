@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
-// app.use(refreshAccessToken());
 app.use(cors(
     {
     origin: `${process.env.CORS_ORIGIN}`,
@@ -21,7 +20,6 @@ app.use(cookieParser())
 
 import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
-import { refreshAccessToken } from "./controllers/admin.controller.js";
 
 app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
 

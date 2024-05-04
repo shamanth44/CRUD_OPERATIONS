@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
-import { createEmployee, deleteEmployee, getAllEmployees, updateEmployee } from "../controllers/employee.controller.js";
+import { createEmployee, deleteEmployee, getAllEmployees, getEmployee, updateEmployee } from "../controllers/employee.controller.js";
 
 const router = Router();
 
@@ -18,6 +18,13 @@ router
   .get(
     verifyJwt,
     getAllEmployees
+  );
+
+  router
+  .route("/get-employee/:id")
+  .get(
+    verifyJwt,
+    getEmployee
   );
   
 router

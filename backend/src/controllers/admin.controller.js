@@ -5,6 +5,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
+
 const generateAccessAndRefreshToken = async (adminId) => {
   try {
     const admin = await Admin.findById(adminId);
@@ -120,13 +121,13 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const options1 = {
     httpOnly: true,
     secure: true,
-    maxAge: 60000,
+    maxAge: 86400000 * 365,
   };
 
   const options2 = {
     httpOnly: true,
     secure: true,
-    maxAge: 300000,
+    maxAge: 86400000 * 365 * 10,
   };
 
   return res
@@ -174,7 +175,6 @@ const logoutAdmin = asyncHandler(async (req, res) => {
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
-
   if (!incomingRefreshToken) {
     throw new ApiError(401, "unauthorized request");
   }
@@ -185,41 +185,44 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET
     );
 
-    const admin = Admin.findById(decodedToken?._id);
+    const admin = await Admin.findById(decodedToken?._id);
 
     if (!admin) {
       throw new ApiError(401, "Invalid refresh token");
     }
+   
+
 
     if (incomingRefreshToken !== admin?.refreshToken) {
-      throw new ApiError(401, "Refresh token  expired");
+      throw new ApiError(401, "Refresh token  expired 1");
     }
 
     const options1 = {
       httpOnly: true,
       secure: true,
-      maxAge: 60000,
+      maxAge: 86400000 * 365,
     };
 
     const options2 = {
       httpOnly: true,
       secure: true,
-      maxAge: 300000,
+      maxAge: 86400000 *365 * 10,
     };
 
     const { accessToken, refreshToken:newRefreshToken } =
       await generateAccessAndRefreshToken(admin._id);
 
+
     return res
       .status(200)
       .cookie("accessToken", accessToken, options1)
-      .cookie("refressToken", newRefreshToken, options2)
+      .cookie("refreshToken", newRefreshToken, options2)
       .json(
         new ApiResponse(
           200,
           {
             accessToken,
-            refressToken: newRefreshToken,
+            refreshToken: newRefreshToken,
           },
           "Access token refreshed"
         )

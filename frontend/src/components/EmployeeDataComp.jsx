@@ -1,0 +1,47 @@
+import React from "react";
+import api from "./Instances/api";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+function EmployeeDataComp({
+  getEmployees,
+  id,
+  uniqueId,
+  image,
+  name,
+  mobileNo,
+  gender,
+  email,
+  designation,
+  course,
+}) {
+  const navigate = useNavigate()
+  const deleteEmployee = async () => {
+    await api.delete(
+      `http://localhost:8000/api/v1/employee/delete-employee/${id}`
+    );
+    getEmployees();
+  };
+  return (
+    <>
+      <tr>
+        <td>{uniqueId}</td>
+        <td>
+          <img src={image} width={50} height={50} />
+        </td>
+        <td>{name}</td>
+        <td>{mobileNo}</td>
+        <td>{gender}</td>
+        <td>{email}</td>
+        <td>{designation}</td>
+        <td>{course}</td>
+        <td className="action">
+          <button onClick={()=>{navigate(`/edit-employee/${id}`)}} className="actionButton1">Edit</button>
+          <button className="actionButton2" onClick={deleteEmployee}>Delete</button>
+        </td>
+      </tr>
+    </>
+  );
+}
+
+export default EmployeeDataComp;

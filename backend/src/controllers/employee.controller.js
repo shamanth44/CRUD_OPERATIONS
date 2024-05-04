@@ -74,6 +74,16 @@ const getAllEmployees = asyncHandler(async (req, res) => {
     );
 });
 
+const getEmployee = asyncHandler(async(req, res) => {
+  const id = req.params.id
+  const employee = await Employee.findById({_id: id})
+
+  return res
+  .json(
+    new ApiResponse(200, employee, "Employee fetched successfully")
+  )
+})
+
 const updateEmployee = asyncHandler(async (req, res) => {
   const { uniqueId, name, email, mobileNo, designation, gender, course } =
     req.body;
@@ -140,4 +150,4 @@ const deleteEmployee = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "Employee deleted successfully"));
 });
 
-export { createEmployee, updateEmployee, deleteEmployee, getAllEmployees };
+export { createEmployee, updateEmployee, deleteEmployee, getAllEmployees, getEmployee };
