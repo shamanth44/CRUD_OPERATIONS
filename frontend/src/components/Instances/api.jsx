@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 axios.defaults.withCredentials = true; // Enable sending cookies across requests
 
 const api = axios.create({
-  baseURL: "https://localhost:8000/api/v1", // Update with your actual API base URL
+  baseURL: "http://localhost:8000/api/v1", // Update with your actual API base URL
 });
 
 // Define a function to intercept requests and add access token (if needed)
@@ -34,7 +34,7 @@ api.interceptors.response.use(
         // }
 
         const response = await axios.post(
-          "https://localhost:8000/api/v1/admin/refresh-token"
+          "http://localhost:8000/api/v1/admin/refresh-token"
         ); // Assuming your backend endpoint
         const responseData = response.data.accessToken;
         if (!responseData) {
