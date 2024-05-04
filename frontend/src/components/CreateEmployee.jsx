@@ -6,7 +6,6 @@ import { Button } from "./reuse/Button";
 import api from "./Instances/api";
 
 function CreateEmployee() {
-  
   const [uniqueId, setUniqueId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
