@@ -6,7 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
 const homeRoute = async (req, res) => {
-  res.send("Server here");
+  res.send("Server");
 };
 
 const generateAccessAndRefreshToken = async (adminId) => {
