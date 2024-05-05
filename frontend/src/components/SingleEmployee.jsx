@@ -3,7 +3,7 @@
 
 // function SingleEmployee() {
 //     const getEmployee = async () => {
-//         await api.get(`https://localhost:8000/api/v1/employee/get-employee/${id}`)
+//         await api.get(`http://localhost:8000/api/v1/employee/get-employee/${id}`)
 //     }
 //   return (
 //     <>

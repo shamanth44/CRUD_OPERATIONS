@@ -31,7 +31,7 @@ function EditEmployee({singleEmployee, id}) {
     formData.append("course", course);
     formData.append("image", image);
     const response = await api.put(
-      `https://localhost:8000/api/v1/employee//update-employee/${id}`,
+      `http://localhost:8000/api/v1/employee//update-employee/${id}`,
       formData
     );
     navigate("/dashboard");
