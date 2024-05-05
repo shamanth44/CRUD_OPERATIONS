@@ -10,7 +10,7 @@ function EmployeeDashboard() {
   axios.defaults.withCredentials = true;
 
   const getEmployees = async () => {
-    const response = await api.get(
+    const response = await axios.get(
       "https://employee-dashboard-backend-three.vercel.app/api/v1/employee/get-employees"
     );
     const employeeData = await response.data.data;

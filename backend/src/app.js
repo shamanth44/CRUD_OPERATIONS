@@ -33,9 +33,9 @@ app.get("/", (req, res) => {
   res.send("Server")
 })
 
-app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-6ef5.onrender.com/api/v1/admin/register
+app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-backend-three.vercel.app/api/v1/admin/register
 
-app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-6ef5.onrender.com/api/v1/employee/create-employee
+app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-backend-three.vercel.app/api/v1/employee/create-employee
 
 
 

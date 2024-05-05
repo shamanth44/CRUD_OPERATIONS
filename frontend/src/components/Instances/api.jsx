@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 // Define a function to intercept requests and add access token (if needed)
-api.interceptors.request.use(
+axios.interceptors.request.use(
   (config) => {
     const accessToken = Cookies.get('accessToken');
     if (accessToken) {
@@ -20,7 +20,7 @@ api.interceptors.request.use(
 );
 
 // Define a function to intercept responses and handle errors
-api.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     // Check for specific error status code (e.g., 401 for Unauthorized)

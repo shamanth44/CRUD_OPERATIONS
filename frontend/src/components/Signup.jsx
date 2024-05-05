@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from "./reuse/Button";
 import { InputField } from "./reuse/InputField";
 import "./css/register.css";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function Signup() {
@@ -10,6 +11,8 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState();
+  const navigate = useNavigate();
+
 
   axios.defaults.withCredentials = true;
 
@@ -23,6 +26,7 @@ function Signup() {
       "https://employee-dashboard-backend-three.vercel.app/api/v1/admin/register",
       formData
     );
+    navigate("/signin")
     console.log(response);
   };
 

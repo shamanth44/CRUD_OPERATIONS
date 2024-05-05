@@ -30,7 +30,7 @@ function CreateEmployee() {
     formData.append("gender", gender);
     formData.append("course", course);
     formData.append("image", image);
-    const response = await api.post(
+    const response = await axios.post(
       "https://employee-dashboard-backend-three.vercel.app/api/v1/employee/create-employee",
       formData
     );
