@@ -5,9 +5,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
-const homeRoute = async (req, res) => {
-  res.send("Server");
-};
+// const homeRoute = async (req, res) => {
+//   res.send("Server");
+// };
 
 const generateAccessAndRefreshToken = async (adminId) => {
   try {
@@ -124,12 +124,14 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const options1 = {
     httpOnly: true,
     secure: true,
+    sameSite: 'None',
     maxAge: 86400000 * 365,
   };
 
   const options2 = {
     httpOnly: true,
     secure: true,
+    sameSite: 'None',
     maxAge: 86400000 * 365 * 10,
   };
 
@@ -233,7 +235,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 });
 
 export {
-  homeRoute,
   registerAdmin,
   loginAdmin,
   logoutAdmin,
