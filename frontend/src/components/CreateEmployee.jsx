@@ -31,7 +31,7 @@ function CreateEmployee() {
     formData.append("course", course);
     formData.append("image", image);
     const response = await api.post(
-      "https://employee-dashboard-backend-delta.vercel.app/api/v1/employee/create-employee",
+      "https://employee-dashboard-backend-three.vercel.app/api/v1/employee/create-employee",
       formData
     );
     navigate("/dashboard");

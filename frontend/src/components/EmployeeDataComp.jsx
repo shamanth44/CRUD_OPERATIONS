@@ -18,7 +18,7 @@ function EmployeeDataComp({
   const navigate = useNavigate()
   const deleteEmployee = async () => {
     await api.delete(
-      `https://employee-dashboard-backend-delta.vercel.app/api/v1/employee/delete-employee/${id}`
+      `https://employee-dashboard-backend-three.vercel.app/api/v1/employee/delete-employee/${id}`
     );
     getEmployees();
   };
