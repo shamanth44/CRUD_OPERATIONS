@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { loginAdmin, logoutAdmin, refreshAccessToken, registerAdmin } from "../controllers/admin.controller.js";
+import { homeRoute, loginAdmin, logoutAdmin, refreshAccessToken, registerAdmin } from "../controllers/admin.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
+router.route("/").get(homeRoute)
 router
   .route("/register")
   .post(upload.fields([{ name: "image", maxCount: 1 }]), registerAdmin);

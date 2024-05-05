@@ -23,9 +23,7 @@ import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
 
 
-app.use("/", (req,res) =>{
-    res.send("Server")
-})
+app.use(adminRouter)
 app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
 
 app.use("/api/v1/employee", employeeRouter) // http://localhost:8000/api/v1/employee/create-employee

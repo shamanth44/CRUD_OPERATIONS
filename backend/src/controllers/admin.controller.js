@@ -5,6 +5,9 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
+const homeRoute = async (req, res) => {
+  res.send("Server here");
+};
 
 const generateAccessAndRefreshToken = async (adminId) => {
   try {
@@ -190,8 +193,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     if (!admin) {
       throw new ApiError(401, "Invalid refresh token");
     }
-   
-
 
     if (incomingRefreshToken !== admin?.refreshToken) {
       throw new ApiError(401, "Refresh token  expired 1");
@@ -206,12 +207,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     const options2 = {
       httpOnly: true,
       secure: true,
-      maxAge: 86400000 *365 * 10,
+      maxAge: 86400000 * 365 * 10,
     };
 
-    const { accessToken, refreshToken:newRefreshToken } =
+    const { accessToken, refreshToken: newRefreshToken } =
       await generateAccessAndRefreshToken(admin._id);
-
 
     return res
       .status(200)
@@ -232,4 +232,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerAdmin, loginAdmin, logoutAdmin, refreshAccessToken };
+export {
+  homeRoute,
+  registerAdmin,
+  loginAdmin,
+  logoutAdmin,
+  refreshAccessToken,
+};
