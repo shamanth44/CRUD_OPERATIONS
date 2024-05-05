@@ -20,7 +20,7 @@ function Signup() {
     formData.append("email", email);
     formData.append("password", password);
     const response = await axios.post(
-      "http://localhost:8000/api/v1/admin/register",
+      "https://localhost:8000/api/v1/admin/register",
       formData
     );
     console.log(response);

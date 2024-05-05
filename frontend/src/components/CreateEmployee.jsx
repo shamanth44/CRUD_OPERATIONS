@@ -31,7 +31,7 @@ function CreateEmployee() {
     formData.append("course", course);
     formData.append("image", image);
     const response = await api.post(
-      "http://localhost:8000/api/v1/employee/create-employee",
+      "https://localhost:8000/api/v1/employee/create-employee",
       formData
     );
     navigate("/dashboard");
