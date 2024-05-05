@@ -31,7 +31,7 @@ function EditEmployee({singleEmployee, id}) {
     formData.append("course", course);
     formData.append("image", image);
     const response = await api.put(
-      `https://employee-dashboard-6ef5.onrender.com/api/v1/employee//update-employee/${id}`,
+      `https://employee-dashboard-backend-delta.vercel.app/api/v1/employee//update-employee/${id}`,
       formData
     );
     navigate("/dashboard");

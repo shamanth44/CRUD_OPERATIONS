@@ -12,7 +12,7 @@ function GetSingleEmployee() {
   const { id } = useParams();
   axios.defaults.withCredentials = true;
   const getEmployee = async () => {
-    const response = await api.get(`https://employee-dashboard-6ef5.onrender.com/api/v1/employee/get-employee/${id}`)
+    const response = await api.get(`https://employee-dashboard-backend-delta.vercel.app/api/v1/employee/get-employee/${id}`)
     const employee = await response.data.data;
     console.log(employee)
     setSingleEmployee(employee)

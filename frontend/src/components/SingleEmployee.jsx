@@ -3,7 +3,7 @@
 
 // function SingleEmployee() {
 //     const getEmployee = async () => {
-//         await api.get(`https://employee-dashboard-6ef5.onrender.com/api/v1/employee/get-employee/${id}`)
+//         await api.get(`https://employee-dashboard-backend-delta.vercel.app/api/v1/employee/get-employee/${id}`)
 //     }
 //   return (
 //     <>
