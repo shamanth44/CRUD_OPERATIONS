@@ -20,7 +20,7 @@ function Signup() {
     formData.append("email", email);
     formData.append("password", password);
     const response = await axios.post(
-      "https://employee-dashboard-backend-delta.vercel.app/api/v1/admin/register",
+      "https://employee-dashboard-6ef5.onrender.com/api/v1/admin/register",
       formData
     );
     console.log(response);
