@@ -68,10 +68,10 @@ function EmployeeDashboard() {
       </table>
     )
   }
+            </div>
   <div className="loading">
          {!hasData && <p>Loading...</p>}
   </div>
-            </div>
     </>
   );
 }
