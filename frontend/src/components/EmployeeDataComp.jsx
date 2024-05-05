@@ -18,7 +18,7 @@ function EmployeeDataComp({
   const navigate = useNavigate()
   const deleteEmployee = async () => {
     await api.delete(
-      `https://localhost:8000/api/v1/employee/delete-employee/${id}`
+      `http://localhost:8000/api/v1/employee/delete-employee/${id}`
     );
     getEmployees();
   };

@@ -16,7 +16,7 @@ function Signin() {
     
   const signin = async () => {
     const response = await axios.post(
-      "https://localhost:8000/api/v1/admin/login",
+      "http://localhost:8000/api/v1/admin/login",
       {email, password}
     );
     navigate("/dashboard")
