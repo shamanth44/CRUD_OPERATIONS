@@ -31,7 +31,7 @@ function EditEmployee({singleEmployee, id}) {
     formData.append("course", course);
     formData.append("image", image);
     const response = await axios.put(
-      `http://localhost:8000/api/v1/employee//update-employee/${id}`,
+      `https://employee-dashboard-backend-three.vercel.app/api/v1/employee//update-employee/${id}`,
       formData
     );
     navigate("/dashboard");

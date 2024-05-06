@@ -23,7 +23,7 @@ function Signup() {
     formData.append("email", email);
     formData.append("password", password);
     const response = await axios.post(
-      "http://localhost:8000/api/v1/admin/register",
+      "https://employee-dashboard-backend-three.vercel.app/api/v1/admin/register",
       formData
     );
     navigate("/signin")
