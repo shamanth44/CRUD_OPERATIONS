@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 axios.defaults.withCredentials = true; // Enable sending cookies across requests
 
 const api = axios.create({
-  baseURL: "https://employee-dashboard-backend-three.vercel.app/api/v1", // Update with your actual API base URL
+  baseURL: "https://employee-dashboard-backend-iota.vercel.app/api/v1", // Update with your actual API base URL
 });
 
 // Define a function to intercept requests and add access token (if needed)
@@ -34,7 +34,7 @@ axios.interceptors.response.use(
         // }
 
         const response = await axios.post(
-          "https://employee-dashboard-backend-three.vercel.app/api/v1/admin/refresh-token"
+          "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/refresh-token"
         ); // Assuming your backend endpoint
         const responseData = response.data.accessToken;
         if (!responseData) {

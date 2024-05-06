@@ -6,7 +6,7 @@ import { Button } from "./reuse/Button";
 function Signout() {
     const navigate = useNavigate();
   const signout = async () => {
-    axios.post("https://employee-dashboard-backend-three.vercel.app/api/v1/admin/logout");
+    axios.post("https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/logout");
     navigate("/signin")
   };
   return (
