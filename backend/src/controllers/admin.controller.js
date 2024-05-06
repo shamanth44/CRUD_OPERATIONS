@@ -64,7 +64,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
     const admin = await Admin.create({
       name,
-      image: image.url,
+      image: image.secure_url,
       email,
       password,
     });
@@ -93,63 +93,68 @@ const loginAdmin = asyncHandler(async (req, res) => {
   //access and refresh token
   //send cookie
 
-  const { email, password } = req.body;
-
-  if (!email) {
-    throw new ApiError(400, "email is required");
-  }
-
-  const admin = await Admin.findOne({
-    email,
-  });
-
-  if (!admin) {
-    throw new ApiError(404, "User doesn't exist");
-  }
-
-  const isPassowrdValid = await admin.isPasswordCorrect(password);
-
-  if (!isPassowrdValid) {
-    throw new ApiError(401, "Invalid Credentials");
-  }
-
-  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
-    admin._id
-  );
-
-  const loggedInAdmin = await Admin.findById(admin._id).select(
-    "-password -refreshToken"
-  );
-
-  const options1 = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    maxAge: 86400000 * 365,
-  };
-
-  const options2 = {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    maxAge: 86400000 * 365 * 10,
-  };
-
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, options1)
-    .cookie("refreshToken", refreshToken, options2)
-    .json(
-      new ApiResponse(
-        200,
-        {
-          admin: loggedInAdmin,
-          accessToken,
-          refreshToken,
-        },
-        "Admin logged in"
-      )
-    );
+ try {
+   const { email, password } = req.body;
+ 
+   if (!email) {
+     throw new ApiError(400, "email is required");
+   }
+ 
+   const admin = await Admin.findOne({
+     email,
+   });
+ 
+   if (!admin) {
+     throw new ApiError(404, "User doesn't exist");
+   }
+ 
+   const isPassowrdValid = await admin.isPasswordCorrect(password);
+ 
+   if (!isPassowrdValid) {
+     throw new ApiError(401, "Invalid Credentials");
+   }
+ 
+   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+     admin._id
+   );
+ 
+   const loggedInAdmin = await Admin.findById(admin._id).select(
+     "-password -refreshToken"
+   );
+ 
+   const options1 = {
+     httpOnly: true,
+     secure: true,
+     sameSite: 'None',
+     maxAge: 86400000 * 365,
+   };
+ 
+   const options2 = {
+     httpOnly: true,
+     secure: true,
+     sameSite: 'None',
+     maxAge: 86400000 * 365 * 10,
+   };
+   console.log("Logged")
+ 
+   return res
+     .status(200)
+     .cookie("accessToken", accessToken, options1)
+     .cookie("refreshToken", refreshToken, options2)
+     .json(
+       new ApiResponse(
+         200,
+         {
+           admin: loggedInAdmin,
+           accessToken,
+           refreshToken,
+         },
+         "Admin logged in"
+       )
+     );
+ } catch (error) {
+  console.log(error)
+ }
 });
 
 const logoutAdmin = asyncHandler(async (req, res) => {

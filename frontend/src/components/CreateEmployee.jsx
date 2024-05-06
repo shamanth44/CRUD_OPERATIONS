@@ -32,7 +32,7 @@ function CreateEmployee() {
     formData.append("image", image);
    try {
      const response = await axios.post(
-       "http://localhost:8000/api/v1/employee/create-employee",
+       "https://employee-dashboard-6ef5.onrender.com/api/v1/employee/create-employee",
        formData
      );
      navigate("/dashboard");

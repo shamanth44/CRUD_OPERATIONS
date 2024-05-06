@@ -11,7 +11,7 @@ const corsOptions = {
 app.use(cors(
   {
   origin: corsOptions,
-  // origin: "http://localhost:5173",
+  // origin: "http://192.168.1.3:5173",
   // origin: `${process.env.CORS_ORIGIN}`,
     // origin: ["http://localhost:5173", "https://employee-dashboard-ashen.vercel.app"],
     credentials: true
@@ -35,9 +35,9 @@ app.get("/", (req, res) => {
   res.send("Server")
 })
 
-app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
+app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-6ef5.onrender.com/api/v1/admin/register
 
-app.use("/api/v1/employee", employeeRouter) // http://localhost:8000/api/v1/employee/create-employee
+app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-6ef5.onrender.com/api/v1/employee/create-employee
 
 
 
