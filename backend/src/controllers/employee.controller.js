@@ -45,7 +45,7 @@ const createEmployee = asyncHandler(async (req, res) => {
     designation,
     gender,
     course,
-    image: image.url,
+    image: image.secure_url,
   });
 
   if (!employee) {
@@ -120,7 +120,7 @@ const updateEmployee = asyncHandler(async (req, res) => {
       designation,
       gender,
       course,
-      image: image.url,
+      image: image.secure_url,
     }
   );
 

@@ -11,7 +11,7 @@ function EmployeeDashboard() {
 
   const getEmployees = async () => {
     const response = await axios.get(
-      "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/get-employees"
+      "http://localhost:8000/api/v1/employee/get-employees"
     );
     const employeeData = await response.data.data;
     console.log(employeeData);
