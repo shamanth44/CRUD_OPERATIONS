@@ -5,7 +5,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const createEmployee = asyncHandler(async (req, res) => {
-  // try {
+  try {
   const { uniqueId, name, email, mobileNo, designation, gender, course } =
     req.body;
 
@@ -55,9 +55,10 @@ const createEmployee = asyncHandler(async (req, res) => {
   return res
     .status(201)
     .json(new ApiResponse(200, employee, "Employee created successfully"));
-  // } catch (error) {
-  //     throw new ApiError(500, "Something went wrong");
-  // }
+  } catch (error) {
+    res.json(new ApiError(402, error))
+      throw new ApiError(500, "Something went wrong");
+  }
 });
 
 const getAllEmployees = asyncHandler(async (req, res) => {

@@ -22,12 +22,16 @@ function Signup() {
     formData.append("name", name);
     formData.append("email", email);
     formData.append("password", password);
-    const response = await axios.post(
-      "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/register",
-      formData
-    );
-    navigate("/signin")
-    console.log(response);
+    try {
+      const response = await axios.post(
+        "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/register",
+        formData
+      );
+      navigate("/signin")
+      console.log(response);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

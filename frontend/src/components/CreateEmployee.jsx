@@ -30,12 +30,16 @@ function CreateEmployee() {
     formData.append("gender", gender);
     formData.append("course", course);
     formData.append("image", image);
-    const response = await axios.post(
-      "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/create-employee",
-      formData
-    );
-    navigate("/dashboard");
-    console.log(response);
+   try {
+     const response = await axios.post(
+       "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/create-employee",
+       formData
+     );
+     navigate("/dashboard");
+     console.log(response);
+   } catch (error) {
+    console.log(error)
+   }
   };
 
   const chooseGender = (e) => {
