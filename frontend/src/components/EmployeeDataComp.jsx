@@ -1,7 +1,7 @@
 import React from "react";
-import api from "./Instances/api";
-import { Link } from "react-router-dom";
+// import api from "./Instances/api";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function EmployeeDataComp({
   getEmployees,
@@ -18,7 +18,7 @@ function EmployeeDataComp({
   const navigate = useNavigate()
   const deleteEmployee = async () => {
     await axios.delete(
-      `https://employee-dashboard-backend-three.vercel.app/api/v1/employee/delete-employee/${id}`
+      `http://localhost:8000/api/v1/employee/delete-employee/${id}`
     );
     getEmployees();
   };

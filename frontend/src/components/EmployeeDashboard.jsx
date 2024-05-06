@@ -11,7 +11,7 @@ function EmployeeDashboard() {
 
   const getEmployees = async () => {
     const response = await axios.get(
-      "https://employee-dashboard-backend-three.vercel.app/api/v1/employee/get-employees"
+      "http://localhost:8000/api/v1/employee/get-employees"
     );
     const employeeData = await response.data.data;
     console.log(employeeData);
@@ -20,9 +20,7 @@ function EmployeeDashboard() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
     getEmployees();
-    }, 500);
   }, []);
   return (
     <>

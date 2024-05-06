@@ -4,13 +4,14 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 // const allowedOrigins = process.env.CORS_ORIGIN
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()),
-    // Add other CORS options if needed (e.g., methods, headers)
-  };
+// const corsOptions = {
+//     origin: process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()),
+//     // Add other CORS options if needed (e.g., methods, headers)
+//   };
 app.use(cors(
-    {
-    origin: corsOptions,
+  {
+  // origin: corsOptions,
+  origin: `${process.env.CORS_ORIGIN}`,
     // origin: ["http://localhost:5173", "https://employee-dashboard-ashen.vercel.app"],
     credentials: true
     }
@@ -33,9 +34,9 @@ app.get("/", (req, res) => {
   res.send("Server")
 })
 
-app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-backend-three.vercel.app/api/v1/admin/register
+app.use("/api/v1/admin", adminRouter) // http://localhost:8000/api/v1/admin/register
 
-app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-backend-three.vercel.app/api/v1/employee/create-employee
+app.use("/api/v1/employee", employeeRouter) // http://localhost:8000/api/v1/employee/create-employee
 
 
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { InputField } from "./reuse/InputField";
 import { Button } from "./reuse/Button";
-import api from "./Instances/api";
+// import api from "./Instances/api";
 
 function CreateEmployee() {
   const [uniqueId, setUniqueId] = useState("");
@@ -31,7 +31,7 @@ function CreateEmployee() {
     formData.append("course", course);
     formData.append("image", image);
     const response = await axios.post(
-      "https://employee-dashboard-backend-three.vercel.app/api/v1/employee/create-employee",
+      "http://localhost:8000/api/v1/employee/create-employee",
       formData
     );
     navigate("/dashboard");
