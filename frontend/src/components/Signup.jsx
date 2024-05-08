@@ -24,7 +24,7 @@ function Signup() {
     formData.append("password", password);
     try {
       const response = await axios.post(
-        "https://employee-dashboard-6ef5.onrender.com/api/v1/admin/register",
+        "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/register",
         formData
       );
       navigate("/signin")

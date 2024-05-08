@@ -32,7 +32,7 @@ function EditEmployee({singleEmployee, id}) {
     formData.append("image", image);
     try {
       const response = await axios.put(
-        `https://employee-dashboard-6ef5.onrender.com/api/v1/employee//update-employee/${id}`,
+        `https://employee-dashboard-backend-iota.vercel.app/api/v1/employee//update-employee/${id}`,
         formData
       );
       navigate("/dashboard");
