@@ -98,17 +98,17 @@ const updateEmployee = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
   }
 
-  const imageLocalPath = req.files?.image[0].path;
+  // const imageLocalPath = req.files?.image[0].path;
 
-  if (!imageLocalPath) {
-    throw new ApiError(400, "Image is required");
-  }
+  // if (!imageLocalPath) {
+  //   throw new ApiError(400, "Image is required");
+  // }
 
-  const image = await uploadOnCloudinary(imageLocalPath);
+  // const image = await uploadOnCloudinary(imageLocalPath);
 
-  if (!image) {
-    throw new ApiError(400, "Image is required");
-  }
+  // if (!image) {
+  //   throw new ApiError(400, "Image is required");
+  // }
 
   const updateEmployee = await Employee.findByIdAndUpdate(
     { _id: id },
@@ -120,7 +120,7 @@ const updateEmployee = asyncHandler(async (req, res) => {
       designation,
       gender,
       course,
-      image: image.secure_url,
+      // image: image.secure_url,
     }
   );
 
