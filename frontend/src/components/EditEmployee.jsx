@@ -29,7 +29,10 @@ function EditEmployee({ singleEmployee, id }) {
     isSubmitting
   } = form;
 
+  const [ loading, setLoading ] = useState(false)
   const onSubmit = async (data) => {
+    setLoading(true)
+    
     const formData = new FormData();
     formData.append("uniqueId", data.uniqueId);
     formData.append("name", data.name);
@@ -45,7 +48,7 @@ function EditEmployee({ singleEmployee, id }) {
         formData
       );
       navigate("/dashboard");
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -201,7 +204,7 @@ function EditEmployee({ singleEmployee, id }) {
           <br />
 
           <button disabled={isSubmitting}>
-            {!isSubmitting && "Update"} {isSubmitting && "Updating"}
+            {!loading && "Update"} {loading && "Updating"}
           </button>
         </form>
       </div>
