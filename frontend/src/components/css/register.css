@@ -153,6 +153,10 @@
   color: white;
 }
 
+#table img{
+  border-radius: 50%;
+}
+
 
 .action{
     display: flex;
