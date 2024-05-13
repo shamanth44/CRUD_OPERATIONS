@@ -120,7 +120,7 @@ const updateEmployee = asyncHandler(async (req, res) => {
       designation,
       gender,
       course,
-      image: image?.secure_url || ,
+      image: image?.secure_url,
     }
   );
 
