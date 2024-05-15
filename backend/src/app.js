@@ -26,11 +26,12 @@ app.use(bodyParser.urlencoded({extended: true, limit: "5mb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-console.log(process.env.CORS_ORIGIN)
+// console.log(process.env.CORS_ORIGIN)
 // routes
 
 import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
+import { ApiError } from "./utils/ApiError.js";
 
 
 // app.use(adminRouter)
@@ -43,6 +44,28 @@ app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-backend-iota
 
 app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/create-employee
 
+// app.use(  async function (
+//   error,
+//   req,
+//   res,
+//   next
+// ) {
+  
+
+//   if (error instanceof ApiError) {
+//     ApiError.sendError(res, error.statusCode, error.message);
+//   }
+
+//   if (error.name === "ValidationError") {
+//     ApiError.handleValidationError(res, error.message);
+//   }
+
+//   if (res.headersSent) {
+//     return;
+//   }
+
+//   ApiError.handleServerError(res);
+// })
 
 
 

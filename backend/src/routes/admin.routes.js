@@ -10,7 +10,7 @@ const router = Router();
 
 router
   .route("/register")
-  .post( validate(signupSchema), upload.fields([{ name: "image", maxCount: 1 }]), registerAdmin);
+  .post( upload.fields([{ name: "image", maxCount: 1 }]), validate(signupSchema), registerAdmin);
 
   router.route("/login").post(loginAdmin)
 

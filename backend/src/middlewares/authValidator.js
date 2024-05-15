@@ -5,8 +5,10 @@ const signupSchema = zod.object({
     email: zod.string({required_error: "Email is required"}).trim().min(3, {message: "Email must me atleast 3 character"}),
     password: zod.string({required_error: "Password is required"}).trim().min(8, {message: "Password must me atleast 8 character"}),
     image: zod.any()
-    .refine((file) => file.size <= 4000000, 'File size must be less than 4MB')
-    .refine((file) => ['image/jpeg', 'image/png'].includes(file.mimetype), 'Only JPEG and PNG images allowed')
+
+    .refine((file) =>  file?.image?.length >= 0 ,"Image is required")
+    .refine((file) => {return !file?.image?.[0]  || file?.image?.[0]?.size  <= 4000000, 'File size must be less than 4MB'})
+    .refine((file) => {return !file?.image?.[0] || ['image/jpeg', 'image/png'].includes(file?.image?.[0]?.mimetype), ' Image is not found Only JPEG and PNG images allowed'})
 });
 
 
