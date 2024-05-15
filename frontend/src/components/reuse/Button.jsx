@@ -1,6 +1,6 @@
 
 
-export function Button({label, onClick}) {
-    return <button onClick={onClick} type="button" className="button">{label}</button>
+export function Button({label, onClick, disabled}) {
+    return <button onClick={onClick} disabled={disabled} type="submit" className="button">{label}</button>
 }
   
