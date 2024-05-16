@@ -10,9 +10,9 @@ const createEmployee = asyncHandler(async (req, res) => {
     req.body;
 
   if (
-    [uniqueId, name, email, mobileNo, designation, gender, course].some(
+    [uniqueId, name, email, designation, gender, course].some(
       (field) => field?.trim() === ""
-    )
+    ) && typeof(mobileNo) === Number
   ) {
     throw new ApiError(400, "All fields are required");
   }

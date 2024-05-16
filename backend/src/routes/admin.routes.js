@@ -2,8 +2,8 @@ import { Router } from "express";
 import { loginAdmin, logoutAdmin, refreshAccessToken, registerAdmin } from "../controllers/admin.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
-import validate from "../middlewares/validator.js";
-import signupSchema from "../middlewares/authValidator.js";
+import {signinSchema, signupSchema} from "../middlewares/authValidator.js";
+import { validate, validateLogin } from "../middlewares/validator.js";
 
 const router = Router();
 
@@ -12,7 +12,7 @@ router
   .route("/register")
   .post( upload.fields([{ name: "image", maxCount: 1 }]), validate(signupSchema), registerAdmin);
 
-  router.route("/login").post(loginAdmin)
+  router.route("/login").post( validateLogin(signinSchema), loginAdmin)
 
   //secured router
 
