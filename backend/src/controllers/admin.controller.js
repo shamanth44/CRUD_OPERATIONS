@@ -37,7 +37,7 @@ const registerAdmin = asyncHandler(async (req, res, next) => {
     });
 
     if (existedAdmin) {
-      throw new ApiError(409, "Email or name already exists");
+      throw new ApiError(409, "Email or name already exists m");
     }
 
     const imageLocalPath = req.files?.image[0]?.path;
@@ -72,13 +72,13 @@ const registerAdmin = asyncHandler(async (req, res, next) => {
       .status(201)
       .json(new ApiResponse(200, createdAdmin, "Admin registered"));
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     next(error);
     // throw new ApiError(500, "Something went wrong while registering 01");
   }
 });
 
-const loginAdmin = asyncHandler(async (req, res) => {
+const loginAdmin = asyncHandler(async (req, res, next) => {
   //req data from body
   //email
   //find user
@@ -104,7 +104,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
    const isPassowrdValid = await admin.isPasswordCorrect(password);
  
    if (!isPassowrdValid) {
-     throw new ApiError(401, "Invalid Credentials");
+     throw new ApiError(401, "Wrong password");
    }
  
    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
@@ -145,7 +145,13 @@ const loginAdmin = asyncHandler(async (req, res) => {
        )
      );
  } catch (error) {
-  console.log(error)
+  // const status = 422
+  // const message = "Invalid credential given"
+  // const error = {
+  //   status, message
+  // }
+  // console.log(error)
+  next(error)
  }
 });
 

@@ -20,9 +20,9 @@ function Signin() {
       {email, password}
     );
     navigate("/dashboard")
+    
     console.log(response);
   };
-
   return (
     <>
       <div className="mainContainer">

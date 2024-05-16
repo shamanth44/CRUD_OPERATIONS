@@ -9,10 +9,14 @@ const validate = (schema) => async(req, res , next) => {
         const parseBody = await schema.parseAsync({image: req.files, ...req.body});
         req.body = parseBody;
         next()
-    } catch (error) {
-        const message = error.errors[0].message
-        console.log(error)
-        res.status(400).json({message: message})
+    } catch (err) {
+        const status = 422
+        const message = err.errors[0].message
+        const error = {
+            status, message
+        }
+        // res.status(400).json({message: message})
+        next(error)
     }
 }
 

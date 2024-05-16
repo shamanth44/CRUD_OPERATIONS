@@ -9,6 +9,9 @@ const corsOptions = {
     origin: process.env.CORS_ORIGIN.split(',').map(origin => origin.trim()),
     // Add other CORS options if needed (e.g., methods, headers)
   };
+
+
+
 app.use(cors(
   {
   origin: corsOptions,
@@ -31,10 +34,11 @@ app.use(cookieParser())
 
 import adminRouter from "./routes/admin.routes.js";
 import employeeRouter from "./routes/employee.routes.js"
-import { ApiError } from "./utils/ApiError.js";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 
 // app.use(adminRouter)
+
 
 app.get("/", (req, res) => {
   res.send("Server")
@@ -44,6 +48,7 @@ app.use("/api/v1/admin", adminRouter) // https://employee-dashboard-backend-iota
 
 app.use("/api/v1/employee", employeeRouter) // https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/create-employee
 
+app.use(errorMiddleware)
 // app.use(  async function (
 //   error,
 //   req,
