@@ -63,8 +63,8 @@
 }
 
 .navbar {
-    position: sticky;
-    top: 0px;
+  position: sticky;
+  top: 0px;
   background-color: #ddedff;
   padding: 5px 25px;
   display: flex;
@@ -102,9 +102,20 @@
   align-items: center;
   /* background-color: #bf2828; */
 }
+.searchInput {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  height: 30px;
+  width: 250px;
+  font-size: 16px;
+  margin: 20px 0px;
+}
+
 .searchInput:focus{
   outline: 2px solid black;
-  box-shadow: 1px 1px 2px;
 }
 
 .employeeTable {
@@ -116,24 +127,23 @@
   margin-left: 40px;
 }
 
-.loading{
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.loading {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.loading p{
-    color: white;
+.loading p {
+  color: white;
 }
-
 
 #table {
   border-collapse: collapse;
-  width: 100%; 
+  width: 100%;
 }
 
 #table tr td {
-    color: black;
+  color: black;
 }
 
 #table td,
@@ -146,8 +156,8 @@
   background-color: #ddedff;
 }
 #table tr:nth-child(odd) {
-    background-color: #b7d8fd;
-  }
+  background-color: #b7d8fd;
+}
 
 #table th {
   padding-top: 12px;
@@ -157,17 +167,15 @@
   color: white;
 }
 
-#table img{
+#table img {
   border-radius: 50%;
 }
 
-
-.action{
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 15px;
+.action {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
 }
-
 
 .editLink {
   text-decoration: none;
@@ -175,31 +183,31 @@
 }
 
 .actionButton1 {
-    cursor: pointer;
-    width: 75px;
-    height: 20px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    background-color: #003059;
-    transition-duration: 0.4s;
+  cursor: pointer;
+  width: 75px;
+  height: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #003059;
+  transition-duration: 0.4s;
 }
 
 .actionButton1:hover {
-    background-color: #01182c;
-  }
+  background-color: #01182c;
+}
 
-  .actionButton2 {
-    cursor: pointer;
-    width: 75px;
-    height: 20px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    background-color: #590000;
-    transition-duration: 0.4s;
+.actionButton2 {
+  cursor: pointer;
+  width: 75px;
+  height: 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #590000;
+  transition-duration: 0.4s;
 }
 
 .actionButton2:hover {
-    background-color: #2c0101;
-  }
+  background-color: #2c0101;
+}

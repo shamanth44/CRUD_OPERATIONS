@@ -42,18 +42,6 @@ function EmployeeDashboard() {
             className="searchInput"
               type="text"
               id="searchEmployee"
-              style={{
-                // outline: "none",
-                border: "none",
-                borderRadius: "5px",
-                backgroundColor: "white",
-                color: "black",
-                height: "30px",
-                width: "250px",
-                fontSize: "16px",
-                margin: "20px 0px",
-              }}
-              onFocus={{outline:"5px solid black"}}
               placeholder="Search employees"
               onChange={(e) => {
                 setTimeout(() => {
