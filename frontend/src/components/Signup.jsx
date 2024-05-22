@@ -5,79 +5,113 @@ import { InputField } from "./reuse/InputField";
 import "./css/register.css";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const form = useForm();
 
+
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    isSubmitting
+  } = form;
 
   axios.defaults.withCredentials = true;
 
-  const signup = async () => {
+  const onSubmit = async (data) => {
     const formData = new FormData();
-    formData.append("image", image);
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
+    formData.append("image", data.image[0]);
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/register",
         formData
       );
-      navigate("/signin")
-      console.log(response);
+      navigate("/signin");
     } catch (error) {
-      console.log(error)
+      const errorMessage = error.response.data.message;
+      setError(errorMessage);
     }
   };
+  console.log(error)
 
   return (
     <>
       <div className="mainContainer">
+        <form onSubmit={handleSubmit(onSubmit)}>
+
         <div className="signup">
           <h1 className="register">Sign up</h1>
+          {error && (
+            <p style={{ color: "red", padding: "0px", margin: "0px" }}>
+              {error}
+            </p>
+          )}
           <div className="inputField">
-            <InputField
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
+            <input  className="input"
+              // onChange={(e) => {
+              //   setName(e.target.value);
+              // }}
+              name="name"
+              {...register("name")}
               placeholder="Name"
               type={"text"}
               label={"Name"}
-            />
-            <InputField
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              />
+            <input  className="input"
+              // onChange={(e) => {
+              //   setEmail(e.target.value);
+              // }}
+              name="email"
+              {...register("email")}
               placeholder="Email"
               type={"text"}
               label={"Email"}
             />
-            <InputField
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+            <input  className="input"
+              // onChange={(e) => {
+              //   setPassword(e.target.value);
+              // }}
+              name="password"
+              {...register("password")}
               placeholder="Password"
               label={"Password"}
               type={"password"}
             />
-            <InputField
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-              }}
+            <input  className="input"
+              // onChange={(e) => {
+              //   setImage(e.target.files[0]);
+              // }}
+              name="image"
+              {...register("image")}
               placeholder="Upload picture"
               type={"file"}
               label={"Profile Picture"}
-            />
+              />
           </div>
           <div className="buttonBox">
-            <Button onClick={signup} label={"Sign up"} />
-            <p className="label">Already have an account? <Link to={"/signin"} className="sign"> Sign in</Link></p>
+            <Button label={"Sign up"} />
+            <p className="label">
+              Already have an account?{" "}
+              <Link to={"/signin"} className="sign">
+                {" "}
+                Sign in
+              </Link>
+            </p>
           </div>
         </div>
+              </form>
       </div>
     </>
   );

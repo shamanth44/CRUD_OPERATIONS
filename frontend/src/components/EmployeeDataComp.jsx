@@ -15,7 +15,8 @@ function EmployeeDataComp({
   designation,
   course,
 }) {
-  const navigate = useNavigate()
+  console.log("datam");
+  const navigate = useNavigate();
   const deleteEmployee = async () => {
     await axios.delete(
       `https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/delete-employee/${id}`
@@ -36,8 +37,17 @@ function EmployeeDataComp({
         <td>{designation}</td>
         <td>{course}</td>
         <td className="action">
-          <button onClick={()=>{navigate(`/edit-employee/${id}`)}} className="actionButton1">Edit</button>
-          <button className="actionButton2" onClick={deleteEmployee}>Delete</button>
+          <button
+            onClick={() => {
+              navigate(`/edit-employee/${id}`);
+            }}
+            className="actionButton1"
+          >
+            Edit
+          </button>
+          <button className="actionButton2" onClick={deleteEmployee}>
+            Delete
+          </button>
         </td>
       </tr>
     </>

@@ -53,6 +53,7 @@ function EditEmployee({ singleEmployee, id }) {
       console.log(error);
     }
   };
+  console.log('rerender')
 
   return (
     <>

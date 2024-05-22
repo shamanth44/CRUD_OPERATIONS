@@ -13,29 +13,26 @@ function Signin() {
     const [error, setError] = useState("");
 
   axios.defaults.withCredentials = true;
-
-    
   const signin = async () => {
     try {
-      const response = await axios.post(
+       await axios.post(
         "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/login",
         {email, password}
       );
       navigate("/dashboard")
       // console.log(response);
     } catch (error) {
-      console.log(error)
-      const errorMessage = error.response.data.error 
+      const errorMessage = error.response.data.message
       setError(errorMessage)
     }
   };
-  console.log(error)
+  // console.log(error)
   return (
     <>
       <div className="mainContainer">
         <div className="signup">
           <h1 className="register">Sign in</h1>
-          {}
+          {error && <p style={{color :"red", padding: "0px", margin: "0px"}}>{error}</p>}
           <div className="inputField">
             <InputField
               onChange={(e) => {
