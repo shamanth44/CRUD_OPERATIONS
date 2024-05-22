@@ -16,6 +16,7 @@ function EmployeeDashboard() {
     (data) =>
       data.uniqueId.startsWith(search, 0) ||
       data.name.toLowerCase().startsWith(search, 0) ||
+      data.name.startsWith(search, 0) ||
       data.email.toLowerCase().startsWith(search, 0) ||
       data.mobileNo.toString().startsWith(search, 0)
   )
