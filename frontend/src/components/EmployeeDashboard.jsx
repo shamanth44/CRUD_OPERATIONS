@@ -11,6 +11,14 @@ function EmployeeDashboard() {
 
   axios.defaults.withCredentials = true;
   console.log("something");
+  const filtered = employee
+  .filter(
+    (data) =>
+      data.uniqueId.startsWith(search, 0) ||
+      data.name.toLowerCase().startsWith(search, 0) ||
+      data.email.toLowerCase().startsWith(search, 0) ||
+      data.mobileNo.toString().startsWith(search, 0)
+  )
   const getEmployees = async () => {
     const response = await axios.get(
       "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/get-employees"
@@ -35,9 +43,10 @@ function EmployeeDashboard() {
       <div className="employeeTable">
         {hasData && (
           <>
-            <label htmlFor="searchEmployee" style={{ color: "white" }}>
+          <div className="tableTop">
+          {/* <label htmlFor="searchEmployee" style={{ color: "white" }}>
               Search
-            </label>
+            </label> */}
             <input
             className="searchInput"
               type="text"
@@ -49,6 +58,8 @@ function EmployeeDashboard() {
                 }, 1000);
               }}
             />
+            <p>Total Count: {filtered.length}</p>
+          </div>
             <table id="table">
               <tbody>
                 <tr>
@@ -63,15 +74,8 @@ function EmployeeDashboard() {
                   <th>Create date</th>
                   <th>Action</th>
                 </tr>
-                {employee
-                  .filter(
-                    (data) =>
-                      data.uniqueId.startsWith(search, 0) ||
-                      data.name.toLowerCase().startsWith(search, 0) ||
-                      data.email.toLowerCase().startsWith(search, 0) ||
-                      data.mobileNo.toString().startsWith(search, 0)
-                  )
-                  .map((currentEmployee, index) => {
+                {
+                  filtered.length>0 ? filtered.map((currentEmployee, index) => {
                     return (
                       <EmployeeDataComp
                         getEmployees={getEmployees}
@@ -88,9 +92,14 @@ function EmployeeDashboard() {
                         createdAt={new Date(currentEmployee.createdAt).toLocaleDateString('en-GB')}
                       />
                     );
-                  })}
+                    
+                  }) : <tr>
+                  <td style={{textAlign: "center"}} colSpan="10">No employees found</td>
+                </tr>
+                  }
               </tbody>
             </table>
+            <div className="pagination" style={{textAlign: "center", height:"50px"}}>Pagination to be implemented</div>
           </>
         )}
       </div>

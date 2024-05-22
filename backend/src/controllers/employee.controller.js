@@ -91,8 +91,8 @@ const updateEmployee = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
   if (
-    [uniqueId, name, email, mobileNo, designation, gender, course].some(
-      (field) => field?.trim() === ""
+    [uniqueId, name, email, designation, gender, course].some(
+      (field) => field?.trim() === "" && typeof(mobileNo) === Number
     )
   ) {
     throw new ApiError(400, "All fields are required");
