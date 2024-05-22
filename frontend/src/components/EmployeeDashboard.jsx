@@ -60,6 +60,7 @@ function EmployeeDashboard() {
                   <th>Email</th>
                   <th>Designation</th>
                   <th>Course</th>
+                  <th>Create date</th>
                   <th>Action</th>
                 </tr>
                 {employee

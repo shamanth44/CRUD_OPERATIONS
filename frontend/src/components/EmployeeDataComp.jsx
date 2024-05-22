@@ -36,6 +36,7 @@ function EmployeeDataComp({
         <td>{email}</td>
         <td>{designation}</td>
         <td>{course}</td>
+        <td>g</td>
         <td className="action">
           <button
             onClick={() => {
