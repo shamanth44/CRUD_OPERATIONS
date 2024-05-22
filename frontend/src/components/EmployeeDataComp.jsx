@@ -14,6 +14,7 @@ function EmployeeDataComp({
   email,
   designation,
   course,
+  createdAt
 }) {
   console.log("datam");
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function EmployeeDataComp({
         <td>{email}</td>
         <td>{designation}</td>
         <td>{course}</td>
-        <td>g</td>
+        <td>{createdAt}</td>
         <td className="action">
           <button
             onClick={() => {

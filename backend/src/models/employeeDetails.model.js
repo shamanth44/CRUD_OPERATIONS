@@ -41,6 +41,7 @@ const employeeSchema = new Schema(
   },
   {
     timestamps: true,
+    default: Date.now()
   }
 );
 

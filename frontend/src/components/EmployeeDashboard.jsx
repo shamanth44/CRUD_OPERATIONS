@@ -85,6 +85,7 @@ function EmployeeDashboard() {
                         email={currentEmployee.email}
                         designation={currentEmployee.designation}
                         course={currentEmployee.course}
+                        createdAt={new Date(currentEmployee.createdAt).toLocaleDateString('en-GB')}
                       />
                     );
                   })}
