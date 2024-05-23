@@ -8,18 +8,21 @@ function EmployeeDashboard() {
   const [employee, setEmployee] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [search, setSearch] = useState("");
+  const [count, setCount] = useState(0);
+  const selectGender = ["", "Male", "Female"]
 
   axios.defaults.withCredentials = true;
   console.log("something");
-  const filtered = employee
-  .filter(
+  const filtered = employee.filter(
     (data) =>
       data.uniqueId.startsWith(search, 0) ||
       data.name.toLowerCase().startsWith(search, 0) ||
       data.name.startsWith(search, 0) ||
+      data.gender.toLowerCase().startsWith(search, 0) ||
+      data.gender.startsWith(search, 0) ||
       data.email.toLowerCase().startsWith(search, 0) ||
       data.mobileNo.toString().startsWith(search, 0)
-  )
+  );
   const getEmployees = async () => {
     const response = await axios.get(
       "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/get-employees"
@@ -35,8 +38,6 @@ function EmployeeDashboard() {
   }, []);
   return (
     <>
-      <h1>Employee Dashboard</h1>
-
       {/* {employee.map((employee1, index) => {
         return <p key={index}>{employee1.name}</p>;
       })} */}
@@ -44,23 +45,26 @@ function EmployeeDashboard() {
       <div className="employeeTable">
         {hasData && (
           <>
-          <div className="tableTop">
-          {/* <label htmlFor="searchEmployee" style={{ color: "white" }}>
+            <div className="tableTop">
+              {/* <label htmlFor="searchEmployee" style={{ color: "white" }}>
               Search
             </label> */}
-            <input
-            className="searchInput"
-              type="text"
-              id="searchEmployee"
-              placeholder="Search employees"
-              onChange={(e) => {
-                setTimeout(() => {
-                  setSearch(e.target.value);
-                }, 1000);
-              }}
-            />
-            <p>Total Count: {filtered.length}</p>
-          </div>
+              <h1>Employee Dashboard</h1>
+              <div className="searchAndCount">
+                <input
+                  className="searchInput"
+                  type="text"
+                  id="searchEmployee"
+                  placeholder="Search employees"
+                  onChange={(e) => {
+                    setTimeout(() => {
+                      setSearch(e.target.value);
+                    }, 1000);
+                  }}
+                />
+                <p>Total Count: {filtered.length}</p>
+              </div>
+            </div>
             <table id="table">
               <tbody>
                 <tr>
@@ -68,15 +72,34 @@ function EmployeeDashboard() {
                   <th>Image</th>
                   <th>Name</th>
                   <th>Mobile No</th>
-                  <th>Gender</th>
+                  <th>
+                    Gender
+                    
+                    {/* <select
+                      defaultValue="Select"
+                      name="select"
+                      id="select"
+                      onChange={(e) => {
+                        setTimeout(() => {
+                          setSearch(e.target.value);
+                        }, 1000);
+                      }}
+                    >
+                      <option value="Select" disabled hidden>
+                        Select
+                      </option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select> */}
+                  </th>
                   <th>Email</th>
                   <th>Designation</th>
                   <th>Course</th>
                   <th>Create date</th>
                   <th>Action</th>
                 </tr>
-                {
-                  filtered.length>0 ? filtered.map((currentEmployee, index) => {
+                {filtered.length > 0 ? (
+                  filtered.map((currentEmployee, index) => {
                     return (
                       <EmployeeDataComp
                         getEmployees={getEmployees}
@@ -90,17 +113,27 @@ function EmployeeDashboard() {
                         email={currentEmployee.email}
                         designation={currentEmployee.designation}
                         course={currentEmployee.course}
-                        createdAt={new Date(currentEmployee.createdAt).toLocaleDateString('en-GB')}
+                        createdAt={new Date(
+                          currentEmployee.createdAt
+                        ).toLocaleDateString("en-GB")}
                       />
                     );
-                    
-                  }) : <tr>
-                  <td style={{textAlign: "center"}} colSpan="10">No employees found</td>
-                </tr>
-                  }
+                  })
+                ) : (
+                  <tr>
+                    <td style={{ textAlign: "center" }} colSpan="10">
+                      No employees found
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
-            <div className="pagination" style={{textAlign: "center", height:"50px"}}>Pagination to be implemented</div>
+            <div
+              className="pagination"
+              style={{ textAlign: "center", height: "50px" }}
+            >
+              Pagination to be implemented
+            </div>
           </>
         )}
       </div>
