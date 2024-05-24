@@ -8,8 +8,6 @@ function EmployeeDashboard() {
   const [employee, setEmployee] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [search, setSearch] = useState("");
-  const [count, setCount] = useState(0);
-  const selectGender = ["", "Male", "Female"]
 
   axios.defaults.withCredentials = true;
   console.log("something");
@@ -23,6 +21,11 @@ function EmployeeDashboard() {
       data.email.toLowerCase().startsWith(search, 0) ||
       data.mobileNo.toString().startsWith(search, 0)
   );
+  const getAdmin = async () => {
+    const response = await axios.get("https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/get-admin")
+    const adminData = await response.data.data
+    console.log(adminData)
+  }
   const getEmployees = async () => {
     const response = await axios.get(
       "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/get-employees"
@@ -34,6 +37,7 @@ function EmployeeDashboard() {
   };
 
   useEffect(() => {
+    getAdmin();
     getEmployees();
   }, []);
   return (

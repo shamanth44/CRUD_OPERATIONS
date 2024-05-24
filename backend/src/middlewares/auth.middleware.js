@@ -26,6 +26,7 @@ export const verifyJwt = asyncHandler(async (req, _, next) => {
     }
 
     req.admin = admin;
+    console.log(admin)
 
     next();
     

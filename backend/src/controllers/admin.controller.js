@@ -155,6 +155,24 @@ const loginAdmin = asyncHandler(async (req, res, next) => {
  }
 });
 
+const getAdminDetails = asyncHandler(async(req, res, next) => {
+  try {
+    const getAdmin = await Admin.findById({_id: req.admin._id}).select(
+      "-password -refreshToken"
+    )
+    if(!getAdmin) {
+      throw new ApiError(401, "Failed to get admin details");
+    }
+    return res
+    .status(201)
+    .json(
+      new ApiResponse(200, getAdmin, "Admin fetched successfully")
+    );
+  } catch (error) {
+    next(error)
+  }
+})
+
 const logoutAdmin = asyncHandler(async (req, res) => {
   await Admin.findByIdAndUpdate(
     req.admin._id,
@@ -242,4 +260,5 @@ export {
   loginAdmin,
   logoutAdmin,
   refreshAccessToken,
+  getAdminDetails,
 };

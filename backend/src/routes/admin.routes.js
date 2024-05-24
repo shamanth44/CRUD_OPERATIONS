@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginAdmin, logoutAdmin, refreshAccessToken, registerAdmin } from "../controllers/admin.controller.js";
+import {  getAdminDetails, loginAdmin, logoutAdmin, refreshAccessToken, registerAdmin } from "../controllers/admin.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 import {signinSchema, signupSchema} from "../middlewares/authValidator.js";
@@ -13,6 +13,7 @@ router
   .post( upload.fields([{ name: "image", maxCount: 1 }]), validate(signupSchema), registerAdmin);
 
   router.route("/login").post( validateLogin(signinSchema), loginAdmin)
+  router.route("/get-admin").get(verifyJwt, getAdminDetails)
 
   //secured router
 
