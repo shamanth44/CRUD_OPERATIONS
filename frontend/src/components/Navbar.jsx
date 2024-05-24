@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Signout from "./Signout";
+import axios from "axios";
 
 function Navbar() {
+
+  const [ hasData, setHasData ] = useState(false);
+  const [admin, setAdmin] = useState({});
+  const getAdmin = async () => {
+    const response = await axios.get("https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/get-admin")
+    const adminData = await response.data.data
+    setAdmin(adminData)
+    setHasData(true)
+  }
+  useEffect(() => {
+    getAdmin();
+  }, []); 
+
   return (
     <div className="navbar">
       <div className="logo">
         <h1>My Dashboard</h1>
       </div>
       <div className="navitemsRight">
-        <Link className="dashboard" to={"/dashboard"}>Employee List</Link>
-        <Link className="dashboard" to={"/create-employee"}>Create Employee</Link>
+        {hasData && <p style={{color: "black", margin:"0px"}}>Welcome {admin.name}</p>}
+        <div className="adminImage"><img src={admin.image}  /></div>
+        {/* <Link className="dashboard" to={"/dashboard"}>Employee List</Link> */}
         <Signout />
       </div>
     </div>

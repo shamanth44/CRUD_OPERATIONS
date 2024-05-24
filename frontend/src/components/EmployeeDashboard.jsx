@@ -3,6 +3,8 @@ import axios from "axios";
 import api from "./Instances/api";
 import EmployeeDataComp from "./EmployeeDataComp";
 import { InputField } from "./reuse/InputField";
+import { Link } from "react-router-dom";
+import { Button } from "./reuse/Button";
 
 function EmployeeDashboard() {
   const [employee, setEmployee] = useState([]);
@@ -10,7 +12,6 @@ function EmployeeDashboard() {
   const [search, setSearch] = useState("");
 
   axios.defaults.withCredentials = true;
-  console.log("something");
   const filtered = employee.filter(
     (data) =>
       data.uniqueId.startsWith(search, 0) ||
@@ -21,23 +22,16 @@ function EmployeeDashboard() {
       data.email.toLowerCase().startsWith(search, 0) ||
       data.mobileNo.toString().startsWith(search, 0)
   );
-  const getAdmin = async () => {
-    const response = await axios.get("https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/get-admin")
-    const adminData = await response.data.data
-    console.log(adminData)
-  }
   const getEmployees = async () => {
     const response = await axios.get(
       "https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/get-employees"
     );
     const employeeData = await response.data.data;
-    console.log(employeeData);
     setEmployee(employeeData);
     setHasData(true);
   };
 
   useEffect(() => {
-    getAdmin();
     getEmployees();
   }, []);
   return (
@@ -66,7 +60,9 @@ function EmployeeDashboard() {
                     }, 1000);
                   }}
                 />
+        <Link className="dashboard" to={"/create-employee"}><Button label={"Create"} /></Link>
                 <p>Total Count: {filtered.length}</p>
+
               </div>
             </div>
             <table id="table">

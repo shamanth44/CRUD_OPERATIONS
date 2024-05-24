@@ -16,7 +16,6 @@ function EmployeeDataComp({
   course,
   createdAt
 }) {
-  console.log("datam");
   const navigate = useNavigate();
   const deleteEmployee = async () => {
     await axios.delete(
