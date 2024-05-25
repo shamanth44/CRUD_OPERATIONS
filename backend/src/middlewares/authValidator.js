@@ -18,7 +18,7 @@ const signinSchema = zod.object({
 const createSchema = zod.object({
     uniqueId: zod.string({required_error: "Unique Id is required"}).trim().min(1, {message: "UniqueId must be atleast 1 character/number"}),
     name: zod.string({required_error: "Name is required"}).trim().min(3, {message: "Name must be atleast 3 character"}),
-    email: zod.string({required_error: "Email is required"}).trim().min(3, {message: "Email must be atleast 3 character"}),
+    email: zod.string().email({required_error: "Email is required"}).trim().min(3, {message: "Email must be atleast 3 character"}),
     mobileNo: zod.string({required_error: "Mobile number is required",  invalid_type_error: "Mobile number must be a number",}).min(10, {message: "Mobile number must be atleast 10 digits"}).transform(str => Number(str)),
     image: zod.any()
     .refine((file) =>  file?.image?.length >= 0 ,"Image is required")
@@ -35,7 +35,7 @@ const createSchema = zod.object({
 const updateSchema = zod.object({
     uniqueId: zod.string({required_error: "Unique Id is required"}).min(1, {message: "Unique Id must be atleast 1 character"}),
     name: zod.string({required_error: "Name is required"}).trim().min(3, {message: "Name must be atleast 3 character"}),
-    email: zod.string({required_error: "Email is required"}).trim().min(3, {message: "Email must be atleast 3 character"}),
+    email: zod.string().email({required_error: "Email is required"}).trim().min(3, {message: "Email must be atleast 3 character"}),
     mobileNo: zod.string({required_error: "Mobile number is required",  invalid_type_error: "Mobile number must be a number",}).min(10, {message: "Mobile number must be atleast 10 digits"}).transform(str => Number(str)),
     image: zod.any()
     .refine((file) =>  file?.image?.length >= 0 ,"Image is required")
