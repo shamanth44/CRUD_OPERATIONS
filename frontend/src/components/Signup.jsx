@@ -8,10 +8,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [image, setImage] = useState();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const form = useForm();

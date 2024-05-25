@@ -34,6 +34,8 @@ function EditEmployee({ singleEmployee, id }) {
   }
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const onSubmit = async (data) => {
     setLoading(true);
 
@@ -45,7 +47,7 @@ function EditEmployee({ singleEmployee, id }) {
     formData.append("designation", data.designation);
     formData.append("gender", data.gender);
     formData.append("course", data.course);
-    formData.append("image", data.image[0]);
+    formData.append("image", data.image?.[0]);
     try {
       const response = await axios.put(
         `https://employee-dashboard-backend-iota.vercel.app/api/v1/employee/update-employee/${id}`,
@@ -54,8 +56,12 @@ function EditEmployee({ singleEmployee, id }) {
       navigate("/dashboard");
       // console.log(response);
     } catch (error) {
-      alert(error.response.data.message)
-      console.log(error);
+
+      const errorMessage = error.response.data.message;
+      setError(errorMessage);
+      setLoading(false)
+      // alert(error.response.data.message)
+      // console.log(error);
     }
   };
 
@@ -63,6 +69,12 @@ function EditEmployee({ singleEmployee, id }) {
     <>
       <div className="editEmployeeContainer">
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <h1 >Edit Employee</h1>
+          {error && (
+            <p style={{ color: "red", padding: "0px", margin: "0px" }}>
+              {error}
+            </p>
+          )}
           <label htmlFor="uniqueId">UniqueId</label>
           <input
             type="text"
