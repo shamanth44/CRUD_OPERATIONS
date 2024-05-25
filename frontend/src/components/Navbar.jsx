@@ -20,7 +20,9 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="logo">
+        <Link className="dashboard" to={"/dashboard"}>
         <h1>My Dashboard</h1>
+        </Link>
       </div>
       <div className="navitemsRight">
         {hasData && <p style={{color: "black", margin:"0px"}}>Welcome {admin.name}</p>}
