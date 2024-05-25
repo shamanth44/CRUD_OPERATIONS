@@ -8,22 +8,18 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function Signup() {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const form = useForm();
 
-
-
-  const {
-    register,
-    control,
-    handleSubmit,
-    isSubmitting
-  } = form;
+  const { register, control, handleSubmit, isSubmitting } = form;
 
   axios.defaults.withCredentials = true;
 
   const onSubmit = async (data) => {
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("image", data.image[0]);
     formData.append("name", data.name);
@@ -38,76 +34,84 @@ function Signup() {
     } catch (error) {
       const errorMessage = error.response.data.message;
       setError(errorMessage);
+      setLoading(false);
     }
   };
-  console.log(error)
+  console.log(error);
 
   return (
     <>
       <div className="mainContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
-
-        <div className="signup">
-          <h1 className="register">Sign up</h1>
-          {error && (
-            <p style={{ color: "red", padding: "0px", margin: "0px" }}>
-              {error}
-            </p>
-          )}
-          <div className="inputField">
-            <input  className="input"
-              // onChange={(e) => {
-              //   setName(e.target.value);
-              // }}
-              name="name"
-              {...register("name")}
-              placeholder="Name"
-              type={"text"}
-              label={"Name"}
+          <div className="signup">
+            <h1 className="register">Sign up</h1>
+            {error && (
+              <p style={{ color: "red", padding: "0px", margin: "0px" }}>
+                {error}
+              </p>
+            )}
+            <div className="inputField">
+              <input
+                className="input"
+                // onChange={(e) => {
+                //   setName(e.target.value);
+                // }}
+                name="name"
+                {...register("name")}
+                placeholder="Name"
+                type={"text"}
+                label={"Name"}
               />
-            <input  className="input"
-              // onChange={(e) => {
-              //   setEmail(e.target.value);
-              // }}
-              name="email"
-              {...register("email")}
-              placeholder="Email"
-              type={"text"}
-              label={"Email"}
-            />
-            <input  className="input"
-              // onChange={(e) => {
-              //   setPassword(e.target.value);
-              // }}
-              name="password"
-              {...register("password")}
-              placeholder="Password"
-              label={"Password"}
-              type={"password"}
-            />
-            <input  className="input"
-              // onChange={(e) => {
-              //   setImage(e.target.files[0]);
-              // }}
-              name="image"
-              {...register("image")}
-              placeholder="Upload picture"
-              type={"file"}
-              label={"Profile Picture"}
+              <input
+                className="input"
+                // onChange={(e) => {
+                //   setEmail(e.target.value);
+                // }}
+                name="email"
+                {...register("email")}
+                placeholder="Email"
+                type={"text"}
+                label={"Email"}
               />
+              <input
+                className="input"
+                // onChange={(e) => {
+                //   setPassword(e.target.value);
+                // }}
+                name="password"
+                {...register("password")}
+                placeholder="Password"
+                label={"Password"}
+                type={"password"}
+              />
+              <input
+                className="input"
+                // onChange={(e) => {
+                //   setImage(e.target.files[0]);
+                // }}
+                name="image"
+                {...register("image")}
+                placeholder="Upload picture"
+                type={"file"}
+                label={"Profile Picture"}
+              />
+            </div>
+            <div className="buttonBox">
+              <button
+                className={`button ${loading ? "loadingbutton" : ""}`}
+                disabled={isSubmitting || loading}
+              >
+                {!loading && "Sign up"} {loading && "Signing up..."}
+              </button>
+              <p className="label">
+                Already have an account?{" "}
+                <Link to={"/signin"} className="sign">
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
-          <div className="buttonBox">
-            <Button label={"Sign up"} />
-            <p className="label">
-              Already have an account?{" "}
-              <Link to={"/signin"} className="sign">
-                {" "}
-                Sign in
-              </Link>
-            </p>
-          </div>
-        </div>
-              </form>
+        </form>
       </div>
     </>
   );

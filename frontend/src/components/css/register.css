@@ -51,6 +51,12 @@
   transition-duration: 0.4s;
 }
 
+.button.loadingbutton {
+  opacity: 0.7;
+  cursor: not-allowed;
+  /* Additional styles for loading state */
+}
+
 .button:hover {
   background-color: #01182c;
 }

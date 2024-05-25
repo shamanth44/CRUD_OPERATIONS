@@ -5,16 +5,24 @@ import { InputField } from "./reuse/InputField";
 import "./css/register.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 
 function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const form = useForm();
+  const { register, control, handleSubmit, isSubmitting } = form;
+
 
   axios.defaults.withCredentials = true;
   const signin = async () => {
     try {
+    setLoading(true);
+
        await axios.post(
         "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/login",
         {email, password}
@@ -24,6 +32,8 @@ function Signin() {
     } catch (error) {
       const errorMessage = error.response.data.message
       setError(errorMessage)
+      setLoading(false)
+
     }
   };
   // console.log(error)
@@ -53,7 +63,12 @@ function Signin() {
         
           </div>
           <div className="buttonBox">
-            <Button onClick={signin} label={"Sign in"} />
+          <button onClick={signin}
+                className={`button ${loading ? "loadingbutton" : ""}`}
+                disabled={isSubmitting || loading}
+              >
+                {!loading && "Sign in"} {loading && "Signing in..."}
+              </button>
             <p className="label">Don't have an account? <Link to={"/signup"} className="sign"> Sign up</Link></p>
           </div>
         </div>
