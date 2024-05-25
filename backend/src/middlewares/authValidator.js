@@ -2,7 +2,7 @@ import zod from "zod";
 
 const signupSchema = zod.object({
     name: zod.string({required_error: "Name is required"}).trim().min(3, {message: "Name must me atleast 3 character"}),
-    email: zod.string({required_error: "Email is required"}).trim().min(3, {message: "Email must me atleast 3 character"}),
+    email: zod.string().email({required_error: "Email is required"}).trim().min(3, {message: "Email must me atleast 3 character"}),
     password: zod.string({required_error: "Password is required"}).trim().min(8, {message: "Password must me atleast 8 character"}),
     image: zod.any()
     .refine((file) =>  file?.image?.length >= 0 ,"Image is required")
@@ -11,7 +11,7 @@ const signupSchema = zod.object({
 });
 
 const signinSchema = zod.object({
-    email: zod.string({required_error: "Email is required"}).trim().min(3, {message: "Email must me atleast 3 character"}),
+    email: zod.string().email({message: "Invalid email address", required_error: "Email is required"}).trim().min(3, {message: "Email must me atleast 3 character"}),
     password: zod.string({required_error: "Password is required"}).trim().min(8, {message: "Password must me atleast 8 character"}),
 })
 
