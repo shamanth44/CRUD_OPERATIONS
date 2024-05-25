@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 function EditEmployee({ singleEmployee, id }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const form = useForm({
     defaultValues: {
       uniqueId: `${singleEmployee.uniqueId}`,
@@ -22,17 +22,21 @@ function EditEmployee({ singleEmployee, id }) {
     },
   });
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    isSubmitting
-  } = form;
+  const { register, control, handleSubmit, isSubmitting } = form;
 
-  const [ loading, setLoading ] = useState(false)
+  function handleCourseChange(selectedCourse) {
+    const courseCheckboxes = document.querySelectorAll('input[name="course"]');
+    courseCheckboxes.forEach((checkbox) => {
+      if (checkbox.value !== selectedCourse) {
+        checkbox.checked = false;
+      }
+    });
+  }
+
+  const [loading, setLoading] = useState(false);
   const onSubmit = async (data) => {
-    setLoading(true)
-    
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("uniqueId", data.uniqueId);
     formData.append("name", data.name);
@@ -50,10 +54,10 @@ function EditEmployee({ singleEmployee, id }) {
       navigate("/dashboard");
       // console.log(response);
     } catch (error) {
+      alert(error.response.data.message)
       console.log(error);
     }
   };
-  console.log('rerender')
 
   return (
     <>
@@ -93,10 +97,9 @@ function EditEmployee({ singleEmployee, id }) {
           <br />
           <br />
 
+          <label htmlFor="image">Profile</label>
+          <input type="file" name="image" id="image" {...register("image")} />
 
-          <label htmlFor="image"></label>
-          <input type="file" name="image" id="image" {...register("image")}/>
-    
           <br />
           <br />
 
@@ -118,7 +121,7 @@ function EditEmployee({ singleEmployee, id }) {
           <br />
           <br />
 
-          <label >Gender</label>
+          <label>Gender</label>
           <input
             type="radio"
             name="gender"
@@ -139,47 +142,14 @@ function EditEmployee({ singleEmployee, id }) {
 
           <br />
           <br />
-
-{/*  */}
-
-          {/* <label htmlFor="mca bca bsc">Course</label>
-            <input
-              type="checkbox"
-              name="course"
-              value="MCA"
-              id="mca"
-              {...register("course")} 
-            />
-            <label htmlFor="mca">MCA</label>
-            <input
-              type="checkbox"
-              name="course"
-              value="BCA"
-              id="bca"
-              {...register("course")}
-            />
-            <label htmlFor="bca">BCA</label>
-            <input
-              type="checkbox"
-              name="course"
-              value="BSC"
-              id="bsc"
-              {...register("course")}
-            />
-            <label htmlFor="bsc">BSC</label> */}
-
-
-
-
-
           <label>Course</label>
-
           <input
             type="checkbox"
             name="course"
             value="MCA"
             id="mca"
             {...register("course")}
+            onChange={() => handleCourseChange("MCA")}
           />
           <label htmlFor="mca">MCA</label>
 
@@ -189,6 +159,7 @@ function EditEmployee({ singleEmployee, id }) {
             value="BCA"
             id="bca"
             {...register("course")}
+            onChange={() => handleCourseChange("BCA")}
           />
           <label htmlFor="bca">BCA</label>
 
@@ -198,9 +169,10 @@ function EditEmployee({ singleEmployee, id }) {
             value="BSC"
             id="bsc"
             {...register("course")}
+            onChange={() => handleCourseChange("BSC")}
           />
           <label htmlFor="bsc">BSC</label>
-{/*  */}
+
           <br />
           <br />
 
@@ -209,7 +181,6 @@ function EditEmployee({ singleEmployee, id }) {
           </button>
         </form>
       </div>
-      <DevTool control={control} />
     </>
   );
 

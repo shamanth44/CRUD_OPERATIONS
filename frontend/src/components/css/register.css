@@ -261,3 +261,51 @@
     margin-bottom: 15px;
   }
 }
+
+
+
+
+.editEmployeeContainer {
+  /* Set a width for the form container */
+  width: 500px;
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.editEmployeeContainer label {
+  display: inline-block; /* Make labels appear inline */
+  margin-right: 10px; /* Add spacing between label and input */
+  width: 80px; /* Set fixed width for labels (optional) */
+  font-weight: bold;
+}
+
+.editEmployeeContainer input[type="text"],
+.editEmployeeContainer input[type="file"],
+.editEmployeeContainer select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.editEmployeeContainer input[type="radio"],
+.editEmployeeContainer input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.editEmployeeContainer button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editEmployeeContainer button:disabled {
+  background-color: #ddd;
+  cursor: default;
+}
