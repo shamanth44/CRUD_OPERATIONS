@@ -65,7 +65,7 @@ function Signin() {
           <div className="buttonBox">
           <button onClick={signin}
                 className={`button ${loading ? "loadingbutton" : ""}`}
-                disabled={isSubmitting || loading}
+                disabled={loading}
               >
                 {!loading && "Sign in"} {loading && "Signing in..."}
               </button>
@@ -73,6 +73,7 @@ function Signin() {
           </div>
         </div>
       </div>
+      
     </>
   );
 }
