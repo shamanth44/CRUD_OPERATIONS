@@ -302,16 +302,16 @@
   margin-right: 5px;
 }
 
-.editEmployeeContainer button {
+/* .editEmployeeContainer button {
   background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
+} */
 
-.editEmployeeContainer button:disabled {
+/* .editEmployeeContainer button:disabled {
   background-color: #ddd;
   cursor: default;
-}
+} */

@@ -188,9 +188,12 @@ function EditEmployee({ singleEmployee, id }) {
           <br />
           <br />
 
-          <button disabled={isSubmitting}>
-            {!loading && "Update"} {loading && "Updating"}
-          </button>
+          <button 
+                className={`button ${loading ? "loadingbutton" : ""}`}
+                disabled={isSubmitting || loading}
+              >
+                {!loading && "Update"} {loading && "Updating..."}
+              </button>
         </form>
       </div>
     </>
