@@ -45,11 +45,7 @@ function Signup() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="signup">
             <h1 className="register">Sign up</h1>
-            {error && (
-              <p style={{ color: "red", padding: "0px", margin: "0px" }}>
-                {error}
-              </p>
-            )}
+            
             <div className="inputField">
               <input
                 className="input"
@@ -96,6 +92,11 @@ function Signup() {
                 label={"Profile Picture"}
               />
             </div>
+            {error && (
+              <p style={{ color: "red", padding: "0px", margin: "0px" }}>
+                {error}
+              </p>
+            )}
             <div className="buttonBox">
               <button
                 className={`button ${loading ? "loadingbutton" : ""}`}

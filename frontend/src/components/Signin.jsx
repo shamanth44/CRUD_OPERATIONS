@@ -42,7 +42,6 @@ function Signin() {
       <div className="mainContainer">
         <div className="signup">
           <h1 className="register">Sign in</h1>
-          {error && <p style={{color :"red", padding: "0px", margin: "0px"}}>{error}</p>}
           <div className="inputField">
             <InputField
               onChange={(e) => {
@@ -62,6 +61,7 @@ function Signin() {
             />
         
           </div>
+          {error && <p style={{color :"red", padding: "0px", margin: "0px"}}>{error}</p>}
           <div className="buttonBox">
           <button onClick={signin}
                 className={`button ${loading ? "loadingbutton" : ""}`}

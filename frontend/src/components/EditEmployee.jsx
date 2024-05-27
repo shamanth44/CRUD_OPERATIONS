@@ -70,11 +70,7 @@ function EditEmployee({ singleEmployee, id }) {
       <div className="editEmployeeContainer">
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <h1 >Edit Employee</h1>
-          {error && (
-            <p style={{ color: "red", padding: "0px", margin: "0px" }}>
-              {error}
-            </p>
-          )}
+         
           <label htmlFor="uniqueId">UniqueId</label>
           <input
             type="text"
@@ -185,6 +181,15 @@ function EditEmployee({ singleEmployee, id }) {
           />
           <label htmlFor="bsc">BSC</label>
 
+          <br />
+          <br />
+
+
+          {error && (
+            <p style={{ color: "red", padding: "0px", margin: "0px" }}>
+              {error}
+            </p>
+          )}
           <br />
           <br />
 
