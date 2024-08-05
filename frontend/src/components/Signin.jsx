@@ -27,6 +27,8 @@ function Signin() {
         "https://employee-dashboard-backend-iota.vercel.app/api/v1/admin/login",
         {email, password}
       );
+      const token = response.data.data.accessToken
+      localStorage.setItem('token', token)
       navigate("/dashboard")
       // console.log(response);
     } catch (error) {
